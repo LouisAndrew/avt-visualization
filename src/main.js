@@ -5,14 +5,24 @@
 // const lowerBandThreshold = 0;
 // const higherBandThreshold = 0;
 
-const audioSource = document.querySelector('audio');
+const Elements = {
+  audioSource: document.querySelector('audio'),
+  controlButton: document.getElementById('control'),
+  /**
+   * @type {HTMLInputElement}
+   */
+  volumeControl: document.getElementById('volume'),
+};
+
 const audioContext = new AudioContext();
-const mediaElementSource = audioContext.createMediaElementSource(audioSource);
-const controlButton = document.getElementById('control');
+const mediaElementSource = audioContext.createMediaElementSource(Elements.audioSource);
+const gainNode = audioContext.createGain();
+
+mediaElementSource.connect(gainNode).connect(audioContext.destination);
 
 // TODO: Create Web Audio API [x]
 // TODO: play / resume audio [x]
-// TODO: Set volume
+// TODO: Set volume [x]
 
 /**
  * @typedef {Object} State
@@ -27,7 +37,6 @@ const State = {
     return this.data;
   },
   /**
-   *
    * @param {Partial<State>} newData
    */
   setState(newData) {
@@ -37,8 +46,6 @@ const State = {
     };
   },
 };
-
-mediaElementSource.connect(audioContext.destination);
 
 /**
  * Function to play/resume audio
@@ -53,6 +60,7 @@ const startAudio = (source, context) => {
 
   source.play();
   State.setState({ isPlaying: true });
+  Elements.controlButton.textContent = 'Stop';
 };
 
 /**
@@ -62,9 +70,10 @@ const startAudio = (source, context) => {
 const stopAudio = (source) => {
   source.pause();
   State.setState({ isPlaying: false });
+  Elements.controlButton.textContent = 'Start';
 };
 
-audioSource.addEventListener(
+Elements.audioSource.addEventListener(
   'ended',
   () => {
     State.setState({ isPlaying: false });
@@ -72,20 +81,22 @@ audioSource.addEventListener(
   false,
 );
 
-controlButton.addEventListener(
+Elements.controlButton.addEventListener(
   'click',
   () => {
     if (State.getState().isPlaying) {
-      stopAudio(audioSource);
-      controlButton.textContent = 'Play';
+      stopAudio(Elements.audioSource);
     } else {
-      startAudio(audioSource, audioContext);
-      controlButton.textContent = 'Stop';
-      console.log(State.getState());
+      startAudio(Elements.audioSource, audioContext);
     }
   },
   false,
 );
+
+Elements.volumeControl.addEventListener('input', (event) => {
+  const { value } = event.target;
+  gainNode.gain.value = value;
+});
 
 /*
     INSERT YOUR CODE HERE
