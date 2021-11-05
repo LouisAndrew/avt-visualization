@@ -1,3 +1,6 @@
+/**
+ * Object containing elements that're going to be used throughout the app.
+ */
 const Elements = {
     audioSource: document.querySelector('audio'),
     controlButton: document.getElementById('control'),
@@ -6,9 +9,9 @@ const Elements = {
    */
     volumeControl: document.getElementById('volume'),
     filters: {
-        lowpass: document.getElementById('lowpass'),
-        bandpass: document.getElementById('bandpass'),
-        highpass: document.getElementById('highpass'),
+        lowband: document.getElementById('lowband'),
+        midband: document.getElementById('midband'),
+        highband: document.getElementById('highband'),
     },
     canvas: document.querySelector('canvas'),
 };

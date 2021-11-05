@@ -3,23 +3,22 @@ import initAudioContext from './initAudioContext.js';
 import { onAudioStart, onAudioStop } from './audioVisualization.js';
 
 const lowerBandThreshold = 150;
-const higherBandThreshold = 5000;
+const higherBandThreshold = 8000;
 
 const {
     audioContext, gainNode, lowbandGain, highbandGain, midbandGain, analyser,
 } = initAudioContext(lowerBandThreshold, higherBandThreshold);
 
 const FilterGains = {
-    lowpass: lowbandGain,
-    bandpass: midbandGain,
-    highpass: highbandGain,
+    lowband: lowbandGain,
+    midband: midbandGain,
+    highband: highbandGain,
 };
 
 /**
  * @typedef {Object} State
  * @property {boolean} isPlaying
  */
-
 const State = {
     data: {
         isPlaying: false,
@@ -28,8 +27,8 @@ const State = {
         return this.data;
     },
     /**
-   * @param {Partial<State>} newData
-   */
+     * @param {Partial<State>} newData
+     */
     setState(newData) {
         this.data = {
             ...this.getState(),
@@ -39,7 +38,7 @@ const State = {
 };
 
 /**
- * Function to play/resume audio
+ * Function to play/resume audio.
  * @param {HTMLAudioElement} source
  * @param {AudioContext} context
  */
@@ -56,7 +55,7 @@ const startAudio = (source, context) => {
 };
 
 /**
- * Function to stop audo
+ * Function to stop audio.
  * @param {HTMLAudioElement} source
  */
 const stopAudio = (source) => {
@@ -97,7 +96,3 @@ Object.entries(Elements.filters).forEach(([id, element]) => {
         FilterGains[id].gain.value = value;
     });
 });
-
-/*
-    INSERT YOUR CODE HERE
- */

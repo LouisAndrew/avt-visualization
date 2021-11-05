@@ -4,13 +4,14 @@ const CANVAS_WIDTH = '800';
 const CANVAS_HEIGHT = '300';
 
 /**
-  * @type {Uint8Array}
-  */
+ * Placeholder for an array of frequencies.
+ * @type {Uint8Array}
+ */
 let frequencyDataArray;
 let animationFrameId = -1;
 
 /**
- *
+ * Function to draw diagram blocks of the current output frequency on the canvas.
  * @param {AnalyserNode} audioAnalyser
  * @param {CanvasRenderingContext2D} canvasContext
  */
@@ -34,7 +35,7 @@ const draw = (audioAnalyser, canvasContext) => {
 };
 
 /**
- *
+ * Function to be called when audio is started.
  * @param {AnalyserNode} analyser
  */
 const onAudioStart = (analyser) => {
@@ -44,6 +45,9 @@ const onAudioStart = (analyser) => {
     draw(analyser, canvasContext);
 };
 
+/**
+ * Function to be called when audio is stopped.
+ */
 const onAudioStop = () => {
     cancelAnimationFrame(animationFrameId);
 };
