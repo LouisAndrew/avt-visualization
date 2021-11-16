@@ -23,7 +23,7 @@ const draw = (audioAnalyser, canvasContext) => {
 
     canvasContext.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-    canvasContext.fillStyle = 'rgb(0, 0, 0)';
+    canvasContext.fillStyle = '#F5F5F5';
     canvasContext.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     const barWidth = (CANVAS_WIDTH / audioAnalyser.frequencyBinCount) * 2.5;
@@ -31,7 +31,7 @@ const draw = (audioAnalyser, canvasContext) => {
         const offsetLeft = (barWidth + 1) * index;
         const barHeight = value * 2;
 
-        canvasContext.fillStyle = `rgb(${value}, 50, 50)`;
+        canvasContext.fillStyle = `rgb(100, 100, ${value + 50})`;
         canvasContext.fillRect(offsetLeft, CANVAS_HEIGHT - barHeight / 2, barWidth, barHeight);
     });
 };

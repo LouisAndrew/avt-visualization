@@ -2,26 +2,35 @@
 
 <head>
     <title>AVT Übungsaufgabe 02</title>
+    <script src="https://unpkg.com/tailwindcss-jit-cdn"></script>
 </head>
 
-<body>
-    <h1>Hello</h1>
-    <button id="control">Play</button>
+<body class="p-5">
+    <h1 class="text-2xl font-bold">Hello</h1>
     <audio src="public/Land_of_8_Bits.wav"></audio>
-    <input id="volume" type="range" min="0" max="2" value="1" step="0.01" />
-    <div>
-        Lowpass
-        <input id="lowband" type="range" min="0" max="2" value="1" step="0.01" />
-    </div>
-    <div>
-        Bandpass
-        <input id="midband" type="range" min="0" max="2" value="1" step="0.01" />
-    </div>
-    <div>Highpass
-        <input id="highband" type="range" min="0" max="2" value="1" step="0.1" />
-    </div>
+    <div class="flex">
+        <div class="mr-16">
+            <button class="font-bold my-3 px-3 py-1 bg-blue-200 rounded" id="control">Start</button>
+            <label class="font-bold block my-2" for="volume">
+                Volume
+                <input class="block" id="volume" type="range" min="0" max="2" value="1" step="0.01" />
+            </label>
+            <label class="font-bold block my-2" for="lowband">
+                Low band
+                <input class="block" id="lowband" type="range" min="0" max="2" value="1" step="0.01" />
+            </label>
+            <label class="font-bold block my-2" for="midband">
+                Band band
+                <input class="block" id="midband" type="range" min="0" max="2" value="1" step="0.01" />
+            </label>
+            <label class="font-bold block my-2" for="hiighband">
+                High band
+                <input class="block" id="highband" type="range" min="0" max="2" value="1" step="0.1" />
+            </label>
+        </div>
 
-    <canvas id="canvas" width="800" height="300"></canvas>
+        <canvas class="rounded shadow bg-[#F5F5F5]" id="canvas" width="800" height="300"></canvas>
+    </div>
 
     <script type="module" src="./src/main.js"></script>
 </body>
