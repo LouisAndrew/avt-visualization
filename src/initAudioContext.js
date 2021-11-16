@@ -48,8 +48,8 @@ const initAudioContext = (lowerBandThreshold, higherBandThreshold) => {
     const [midbandFilter, midbandGain] = initFilter(
         audioContext,
         'bandpass',
-        1500,
-    ); // Hard coded according to the provided audio file.
+        1500, // Hard coded according to the provided audio file.
+    );
     midbandFilter.Q.value = 10;
 
     const analyser = audioContext.createAnalyser();
